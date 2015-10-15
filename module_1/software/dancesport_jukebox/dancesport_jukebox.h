@@ -8,8 +8,23 @@
 #ifndef DANCESPORT_JUKEBOX_H_
 #define DANCESPORT_JUKEBOX_H_
 
+#define root (char*) ""
+#define chacha (char*) "chacha/"
+#define jive (char*) "jive/"
+#define rumba (char*) "rumba/"
+#define samba (char*) "samba/"
+#define paso_doble (char*) "paso/"
+#define waltz (char*) "waltz/"
+#define viennese_waltz (char*) "viennese/"
+#define tango (char*) "tango/"
+#define quickstep (char*) "quickstep/"
+#define slow_foxtrot (char*) "slowfox/"
+#define is_swav (char *) ".wav"
+
 int main();
 
 void av_config_setup(const char * av_location);
+
+int populate_playlist();
 
 #endif /* DANCESPORT_JUKEBOX_H_ */

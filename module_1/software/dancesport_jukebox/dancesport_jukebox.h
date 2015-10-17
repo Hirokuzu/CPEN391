@@ -19,7 +19,6 @@
 #define tango (char*) "tango/"
 #define quickstep (char*) "quickstep/"
 #define slow_foxtrot (char*) "slowfox/"
-#define is_swav (char *) ".wav"
 
 int main();
 

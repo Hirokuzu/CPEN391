@@ -27,4 +27,6 @@ void av_config_setup(const char * av_location);
 
 int populate_playlist();
 
+void refill_write_fifo(void * context, alt_u32 id);
+
 #endif /* DANCESPORT_JUKEBOX_H_ */

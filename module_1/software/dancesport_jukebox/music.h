@@ -17,7 +17,7 @@ typedef struct music
 	size_t file_len;
 } music;
 
-music * get_music_from_wav(char * directory, char * file_name);
+// music * get_music_from_wav(char * directory, char * file_name);
 
 char ** get_genre_from_SD(char * directory, int * list_len);
 

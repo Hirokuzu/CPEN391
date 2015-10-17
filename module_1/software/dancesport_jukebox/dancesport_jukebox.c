@@ -17,9 +17,9 @@
 #include "system.h"
 
 int main() {
-	av_config_setup("/dev/audio_and_video_config_0");
-	alt_up_audio_dev* audio_out = alt_up_audio_open_dev("/dev/audio_0");
-	alt_up_sd_card_dev* sd_card = alt_up_sd_card_open_dev("/dev/sdcard");
+	av_config_setup(AUDIO_AND_VIDEO_CONFIG_0_NAME);
+	alt_up_audio_dev* audio_out = alt_up_audio_open_dev(AUDIO_0_NAME);
+	alt_up_sd_card_dev* sd_card = alt_up_sd_card_open_dev(SDCARD_NAME);
 
 	if (sd_card != NULL) {
 		// we can work on it?
@@ -30,11 +30,6 @@ int main() {
 				printf("FAT16\n");
 				int list_len;
 				char ** playlist = get_genre_from_SD(root, &list_len);
-				int i = 0;
-				for(;i < list_len; i++)
-				{
-					printf("%s\n", playlist[i]);
-				}
 				music song;
 				song.filename = playlist[1];
 				song.fd = alt_up_sd_card_fopen(song.filename, false);
@@ -101,4 +96,11 @@ int main() {
 void av_config_setup(const char * av_location) {
 	alt_up_av_config_dev * av_config = alt_up_av_config_open_dev(av_location);
 	while (!alt_up_av_config_read_ready(av_config));
+}
+
+void refill_write_fifo(void * context, alt_u32 id)
+{
+	int len = alt_up_audio_write_fifo_space(AUDIO_0_NAME, ALT_UP_AUDIO_LEFT);
+	// write current track to fifo?
+
 }

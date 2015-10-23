@@ -69,6 +69,15 @@ long device_ioctl(struct file *flip, unsigned int ioctl_num, unsigned long ioctl
 {
 	switch(ioctl_num)
 	{
+		case IOCTL_SET_LED:
+			iowrite8((char)ioctl_param % 0xff, led);
+			return OK;
+		case IOCTL_GET_LED:
+			return ioread8(led);
+		case IOCTL_GET_DIPSW:
+			return ioread8(dipsw);
+		case IOCTL_GET_BUTTON:
+			return ioread8(button);
 		default:
 			return -1;
 	}

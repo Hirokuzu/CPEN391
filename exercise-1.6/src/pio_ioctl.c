@@ -22,6 +22,8 @@ unsigned long virtual_base;
 volatile static char* led;
 volatile static char* dipsw;
 volatile static char* button;
+//Memory sink when not in use
+static unsigned long sink;
 
 //Required function address structure
 struct file_operations fops = {
@@ -52,7 +54,13 @@ static int device_open(struct inode *inode, struct file *flip)
 //Free device to allow access by other processes
 static int device_release(struct inode *inode, struct file *flip)
 {
-	
+	Device_Open--;
+	led = (short*) &sink;
+	dipsw = (short*) &sink;
+	button = (char*) &sink;
+	iounmap((void*)virtual_base);
+	module_put(THIS_MODULE);
+
 	return OK;
 }
 

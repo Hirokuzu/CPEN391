@@ -16,7 +16,7 @@
 #define IOCTL_GET_BUTTON _IOR(MAJOR_NUM, 3, char)
 
 #define PIO_REGS_BASE (ALT_LWFPGASLVS_OFST + LED_PIO_BASE)
-#define PIO_REGS_SPAN (BUTTON_PIO)END - LED_PIO_BASE + 1)
+#define PIO_REGS_SPAN (BUTTON_PIO_END - LED_PIO_BASE + 1)
 
 static int device_open(struct inode *inode, struct file *file);
 static int device_release(struct inode *inode, struct file *file);

@@ -19,6 +19,9 @@ MODULE_DESCRIPTION("User-level access to FPGA IOs");
 
 //Mapped memory base address
 unsigned long virtual_base;
+volatile static char* led;
+volatile static char* dipsw;
+volatile static char* button;
 
 //Required function address structure
 struct file_operations fops = {
@@ -30,7 +33,19 @@ struct file_operations fops = {
 //Open device for i/o operations
 static int device_open(struct inode *inode, struct file *flip)
 {
-	
+	// check if device in use
+	if(Device_Open)
+		return -EBUSY;
+	Device_Open++; // call dibs
+
+	// set up memory
+	virtual_base = (unsigned int) ioremap(PIO_REGS_BASE, PIO_REGS_SPAN);	
+	led = virtual_base;
+	dipsw = virtual_base + 0x20;
+	button = virtual_base + 0x40;
+
+	// attempt to get device from kernel
+	try_module_get(THIS_MODULE);
 	return OK;
 }
 

@@ -26,7 +26,7 @@ int pio_set_led(int file_desc, char led_state)
 {
     int ret = ioctl(file_desc, IOCTL_SET_LED, led_state);
     if(ret < 0) {
-        fprintf(strerr, "LED writing failed with error code %d.\n", errno);
+        printf("LED writing failed with error code %d.\n", ret);
     }
     return ret;
 }
@@ -52,13 +52,13 @@ char pio_get_button(int file_desc)
     return ret;
 }
 
-bool check_fd(int file_desc)
+int check_fd(int file_desc)
 {
     if(file_desc < 0)
     {
         fprintf(stderr, "Invalid file descriptor on line %d.\n", __LINE__);
-        return false;
+        return 0;
     }
-    return true;
+    return 1;
 }
 

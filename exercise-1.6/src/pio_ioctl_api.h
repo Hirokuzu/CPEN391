@@ -10,5 +10,6 @@ int pio_set_led(int file_desc, char led_state);
 char pio_get_led(int file_desc);
 char pio_get_dipsw(int file_desc);
 char pio_get_button(int file_desc);
+bool check_fd(int file_desc);
 
 #endif

@@ -9,6 +9,10 @@
 *.done
 *.jdi
 *.qdf
+*.qpf
+*.qsf
+*.cmp
+*.sopcinfo
 *.cdf
 *.pin
 *.pof
